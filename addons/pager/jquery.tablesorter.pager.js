@@ -362,7 +362,7 @@
 				p.ajaxObject.success = function(data)
 				{
 					//	Refuse to process old ajax commands that were overwritten by new ones
-					if(counter != p.ajaxCounter){
+					if(counter < p.ajaxCounter){
 						return;
 					}
 					
