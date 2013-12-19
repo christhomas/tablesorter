@@ -1,5 +1,5 @@
 /**!
-* TableSorter 2.14.1 - Client-side table sorting with ease!
+* TableSorter 2.14.5 - Client-side table sorting with ease!
 * @requires jQuery v1.2.6+
 *
 * Copyright (c) 2007 Christian Bach
@@ -24,7 +24,7 @@
 
 			var ts = this;
 
-			ts.version = "2.14.1";
+			ts.version = "2.14.5";
 
 			ts.parsers = [];
 			ts.widgets = [];
@@ -814,28 +814,34 @@
 				})
 				.bind("addRows.tablesorter", function(e, $row, resort, callback) {
 					e.stopPropagation();
-					var i, rows = $row.filter('tr').length,
-					dat = [], l = $row[0].cells.length,
-					tbdy = $this.find('tbody').index( $row.parents('tbody').filter(':first') );
-					// fixes adding rows to an empty table - see issue #179
-					if (!c.parsers) {
-						buildParserCache(table);
-					}
-					// add each row
-					for (i = 0; i < rows; i++) {
-						// add each cell
-						for (j = 0; j < l; j++) {
-							dat[j] = c.parsers[j].format( getElementText(table, $row[i].cells[j], j), table, $row[i].cells[j], j );
+					if (isEmptyObject(c.cache)) {
+						// empty table, do an update instead - fixes #450
+						updateHeader(table);
+						commonUpdate(table, resort, callback);
+					} else {
+						var i, rows = $row.filter('tr').length,
+						dat = [], l = $row[0].cells.length,
+						tbdy = $this.find('tbody').index( $row.parents('tbody').filter(':first') );
+						// fixes adding rows to an empty table - see issue #179
+						if (!c.parsers) {
+							buildParserCache(table);
 						}
-						// add the row index to the end
-						dat.push(c.cache[tbdy].row.length);
-						// update cache
-						c.cache[tbdy].row.push([$row[i]]);
-						c.cache[tbdy].normalized.push(dat);
-						dat = [];
+						// add each row
+						for (i = 0; i < rows; i++) {
+							// add each cell
+							for (j = 0; j < l; j++) {
+								dat[j] = c.parsers[j].format( getElementText(table, $row[i].cells[j], j), table, $row[i].cells[j], j );
+							}
+							// add the row index to the end
+							dat.push(c.cache[tbdy].row.length);
+							// update cache
+							c.cache[tbdy].row.push([$row[i]]);
+							c.cache[tbdy].normalized.push(dat);
+							dat = [];
+						}
+						// resort using current settings
+						checkResort($this, resort, callback);
 					}
-					// resort using current settings
-					checkResort($this, resort, callback);
 				})
 				.bind("sorton.tablesorter", function(e, list, callback, init) {
 					var c = table.config;
@@ -1284,11 +1290,11 @@
 							if (init || !(c.widgetInit[w.id])) {
 								if (w.hasOwnProperty('options')) {
 									wo = table.config.widgetOptions = $.extend( true, {}, w.options, wo );
-									c.widgetInit[w.id] = true;
 								}
 								if (w.hasOwnProperty('init')) {
 									w.init(table, w, c, wo);
 								}
+								c.widgetInit[w.id] = true;
 							}
 							if (!init && w.hasOwnProperty('format')) {
 								w.format(table, c, wo, false);
@@ -1311,7 +1317,8 @@
 				for (i = 0; i < l; i++){
 					if ( w[i] && w[i].id && (doAll || $.inArray( w[i].id, cw ) < 0) ) {
 						if (c.debug) { log( 'Refeshing widgets: Removing ' + w[i].id  ); }
-						if (w[i].hasOwnProperty('remove')) {
+						// only remove widgets that have been initialized - fixes #442
+						if (w[i].hasOwnProperty('remove') && c.widgetInit[w[i].id]) {
 							w[i].remove(table, c, c.widgetOptions);
 							c.widgetInit[w[i].id] = false;
 						}

@@ -377,23 +377,22 @@
 			</ul>
 		</li>
 		<li><a href="example-widget-build-table.html">Build Table Widget</a> (<span class="version">v2.11</span>).</li>
-		<li><a href="example-widget-grouping.html">Grouping rows Widget</a> (v2.8; <span class="version updated">v2.14</span>).</li>
+		<li><a href="example-widget-grouping.html">Grouping rows Widget</a> (v2.8; <span class="version updated">v2.14.6</span>).</li>
 		<li><a href="example-widget-grouping-filter-childrows.html">Grouping rows Widget + filter + child rows</a></li>
 		<li><a href="example-widgets.html">Repeat Headers widget</a> (v2.0.5; <span class="version updated">v2.9</span>)</li>
 		<li><a href="example-widget-resizable.html">Resizable Columns widget</a> (v2.0.23.1; <span class="version updated">v2.8.3</span>)</li>
 		<li><a href="example-widget-savesort.html">Save sort widget</a> (v2.0.27)</li>
 		<li><a href="example-widget-scroller.html">Scroller widget</a> (<span class="version">v2.9</span>).</li>
-		<li><a href="example-widget-sticky-header.html">Sticky header widget</a> (v2.0.21.1; <span class="version updated">v2.10</span>)</li>
+		<li><a href="example-widget-sticky-header.html">Sticky header widget</a> (v2.0.21.1; <span class="version updated">v2.14.4</span>)</li>
+		<li><a href="example-widget-css-sticky-header.html">Sticky header (css3) widget</a> (<span class="version">v2.14.2</span>; <span class="version updated">v2.14.6</span>).</li>
 		<li>UITheme widget:
 			<ul>
 				<li><a href="example-widget-ui-theme.html">jQuery UI theme</a> (v2.0.9; <span class="version updated">v2.13.3</span>)</li>
 				<li><a href="example-widget-bootstrap-theme.html">Bootstrap</a> (v2.4)</li>
 			</ul>
 		</li>
-		<li>
-			<a href="example-widget-zebra.html">Zebra stripe widget</a><br>
-			<br>
-		</li>
+		<li><a href="example-widget-zebra.html">Zebra stripe widget</a><br><br></li>
+
 		<li><a href="example-parsers-dates.html">Assorted date parsers</a> (<span class="version">v2.8</span>; <span class="version updated">v2.14</span>).</li>
 		<li><a href="example-parsers-ignore-articles.html">Ignore leading articles parser</a> (Ignore &quot;A&quot;, &quot;An&quot; and &quot;The&quot; in titles) (<span class="version">v2.8</span>).</li>
 		<li><a href="example-widget-grouping.html">Input/select parsers</a> (used by Grouping rows widget) (<span class="version">v2.8</span>; <span class="version updated">v2.14</span>).</li>
@@ -401,6 +400,7 @@
 		<li><a href="example-parsers-feet-inch-fraction.html">Feet-inch-fraction parser</a> (<span class="version">v2.8</span>).</li>
 		<li><a href="example-parsers-ip-address.html">IPv6 address parser</a> (<span class="version">v2.12</span>).</li>
 		<li><a href="example-parsers-file-type.html">File type parser</a> (<span class="version">v2.13</span>).</li>
+		<li><a href="example-option-textsorter-semver.html">Semantic Versioning (Semver) sorting</a> (<span class="version">v2.14.3</span>).</li>
 	</ul>
 
 	</div>
@@ -456,6 +456,7 @@
 		<li><a href="http://jsfiddle.net/Mottie/abkNM/325/">tablesorter basic demo using jQuery UI theme</a></li>
 		<li><a href="http://jsfiddle.net/Mottie/4mVfu/1/">tablesorter basic demo with pager plugin</a></li>
 		<li><a href="http://codepen.io/Mottie/pen/eqBbn">tableSorter LESS theme; modify the colors dynamically in this LESS theme demo!</a></li>
+		<li><span class="label label-info">Beta</span> <a href="example-widget-column-selector.html">Column Selector Widget</a> (<span class="version">v2.14.6</span>).</li>
 		<li><span class="label label-info">Beta</span> pager widget (<a href="example-widget-pager.html">basic</a> &amp; <a href="example-widget-pager-ajax.html">ajax</a> demos) (<span class="version">v2.12</span>).</li>
 		<li><span class="label label-info">Beta</span> <a href="../beta-testing/example-pager-custom-controls.html">Custom pager control script</a></li>
 		<li><span class="label label-info">Beta</span> <a href="../beta-testing/example-external-filters-using-select2.html">External filters using Select2 plugin</a></li>
@@ -1163,8 +1164,8 @@ From the example function above, you'll end up with something similar to this HT
 				<td><a href="example-option-sortreset-sortrestart.html">Example</a></td>
 			</tr>
 
-			<tr id="sortResetKey">
-				<td>sortResetKey</td>
+			<tr id="sortresetkey">
+				<td><span class="permalink">sortResetKey</span></td>
 				<td>String</td>
 				<td>&quot;ctrlKey&quot;</td>
 				<td>The key used to reset sorting on the entire table. Defaults to the control key. The other options are <code>&quot;shiftKey&quot;</code> or <code>&quot;altKey&quot;</code>. Reference: <a class="external" href="https://developer.mozilla.org/en/DOM/MouseEvent">https://developer.mozilla.org/en/DOM/MouseEvent</a></td>
@@ -1371,7 +1372,7 @@ $(function(){
 
 					</div>
 				</td>
-				<td><a href="example-option-custom-sort.html">Example</a></td>
+				<td>Ex:<a href="example-option-custom-sort.html">1</a> <a href="example-option-textsorter-semver.html">2</a></td>
 			</tr>
 
 			<tr id="usnumberformat">
@@ -1491,6 +1492,8 @@ $(function(){
       // *** stickyHeaders widget ***
       // extra class name added to the sticky header row
       stickyHeaders : '',
+      // jQuery selector or object to attach sticky header to
+      stickyHeaders_attachTo : null
       // number or jquery selector targeting the position:fixed element
       stickyHeaders_offset : 0,
       // added to table ID, if it exists
@@ -2342,7 +2345,29 @@ $('table').trigger('search', false);</pre></div>
   });
 });</pre></div>
 				</td>
-				<td></td>
+				<td><a href="example-widget-sticky-header.html">Example</a></td>
+			</tr>
+
+			<tr id="widget-sticky-headers-attachto">
+				<td><a href="#" class="permalink">stickyHeaders_attachTo</a></td>
+				<td>String</td>
+				<td>null</td>
+				<td>
+					Sticky Headers widget: points to the table wrapper to stick the headers to while scrolling. Use this option to point to their needs (<span class="version">v2.14.4</span>).
+					<div class="collapsible">
+					<br>
+					Use the <a href="#widget-sticky-headers-attachto"><code>stickyHeaders_attachTo</code></a> option as follows:<br>
+					<pre class="prettyprint lang-javascript">$(function(){
+  $("table").tablesorter({
+    widgets: ["stickyHeaders"],
+    widgetOptions : {
+      // Where to attach the stickyHeaders
+      stickyHeaders_attachTo : '.wrapper' // $('.wrapper') jQuery object can also be used
+    }
+  });
+});</pre></div>
+				</td>
+				<td><a href="example-widget-sticky-header.html">Example</a></td>
 			</tr>
 
 			<tr id="widget-sticky-headers-offset">
@@ -2635,7 +2660,6 @@ $.extend($.tablesorter.themes.jui, {
         return [ formatted_data, total_rows ];
       }
     });
-  });
 });</pre>The <code>ajaxUrl</code> template replaces the following tags with values from the tablesorter plugin and pager addon:
 <br>
 <table class="info">
@@ -2690,7 +2714,6 @@ $.extend($.tablesorter.themes.jui, {
         return url += '&amp;currntUrl=' + window.location.href;
       }
     });
-  });
 });</pre></div>
 				</td>
 				<td><a href="example-pager-ajax.html">Example</a></td>
@@ -2722,10 +2745,19 @@ $.extend($.tablesorter.themes.jui, {
         return [ total_rows ];
       }
     });
-  });
 });</pre></div>
 				</td>
 				<td><a href="example-pager-ajax.html">Example</a></td>
+			</tr>
+
+			<tr id="pager-processajaxoninit">
+				<td><span class="permalink">processAjaxOnInit</span></td>
+				<td>Boolean</td>
+				<td>true</td>
+				<td>
+					Set this option to <code>false</code> if your table data is preloaded into the table, but you are still using ajax (<span class="version">v2.14.5</span>).
+				</td>
+				<td></td>
 			</tr>
 
 			<tr id="pager-ajaxprocessing">
@@ -2733,7 +2765,7 @@ $.extend($.tablesorter.themes.jui, {
 				<td>Function</td>
 				<td>null</td>
 				<td>
-					This function is required to return the ajax data obtained from your server into a useable format for tablesorter to apply to the table (v2.1, <span class="version updated">v2.10</span>).
+					This function is required to return the ajax data obtained from your server into a useable format for tablesorter to apply to the table (v2.1, <span class="version updated">v2.14.3</span>).
 					<div class="collapsible">
 					<br>
 					In <span class="version">v2.10</span>, the returned rows is now optional. And it can either be an array of arrays or a jQuery object (not attached to the table)
@@ -2752,7 +2784,8 @@ $.extend($.tablesorter.themes.jui, {
     [ "rowNcell1", "rowNcell2", ... "rowNcellN" ]
   ],
   [ "header1", "header2", ... "headerN" ] // optional
-]</pre>Here is some example JSON (comments added, but not allowed in JSON) which is contained in the <a href="https://github.com/Mottie/tablesorter/blob/master/docs/assets/City0.json">City0.json</a> file:
+]</pre><span class="label label-info">Note</span>: In <span class="version">v2.14.3</span>, the contents of the array can also contain table cell markup (i.e. <code>&quot;&lt;td class='green'&gt;+ 10%&lt;/td&gt;&quot;</code>).<br>
+<br>Here is some example JSON (comments added, but not allowed in JSON) which is contained in the <a href="https://github.com/Mottie/tablesorter/blob/master/docs/assets/City0.json">City0.json</a> file:
 <pre class="prettyprint lang-javascript">{
   // total rows
   "total_rows": 80,
@@ -3781,9 +3814,11 @@ $.tablesorter.addHeaderResizeEvent( table, true );</pre></div>
     })
 
     // bind to pager events
-    .bind('pagerChange pagerComplete', function(e,c){
+    .bind('pagerChange pagerComplete', function(event, options){
+      // options = table.config.pager (pager addon)
+      // options = table.config (pager widget) - so use options.pager.page below
       // c.totalPages contains the total number of pages
-      $('#display').html( e.type + " event triggered, now on page " + (c.page + 1) );
+      $('#display').html( event.type + " event triggered, now on page " + (options.page + 1) );
     });
 
 });</pre></div>
@@ -3807,9 +3842,11 @@ $.tablesorter.addHeaderResizeEvent( table, true );</pre></div>
     })
 
     // bind to pager events
-    .bind('pagerChange pagerComplete', function(e,c){
+    .bind('pagerChange pagerComplete', function(event, options){
+      // options = table.config.pager (pager addon)
+      // options = table.config (pager widget) - so use options.pager.page below
       // c.totalPages contains the total number of pages
-      $('#display').html( e.type + " event triggered, now on page " + (c.page + 1) );
+      $('#display').html( event.type + " event triggered, now on page " + (options.page + 1) );
     });
 
 });</pre></div>
@@ -3829,8 +3866,11 @@ $.tablesorter.addHeaderResizeEvent( table, true );</pre></div>
     .tablesorter()
 
     // bind to pager initialized event BEFORE calling the addon
-    .bind('pagerBeforeInitialized', function(e, c){
-      // e = event object; c = pager options
+    .bind('pagerBeforeInitialized', function(event, options){
+      // options = table.config.pager (pager addon)
+      // options = table.config (pager widget)
+
+      // event = event object; options = pager options
     })
 
     // initialize the pager plugin
@@ -3855,9 +3895,11 @@ $.tablesorter.addHeaderResizeEvent( table, true );</pre></div>
     .tablesorter()
 
     // bind to pager initialized event BEFORE calling the addon
-    .bind('pagerInitialized', function(e, c){
+    .bind('pagerInitialized', function(event, options){
+      // options = table.config.pager (pager addon)
+      // options = table.config (pager widget) - so use options.pager.page below
       // c.totalPages contains the total number of pages
-      $('#display').html( e.type + " event triggered, now on page " + (c.page + 1) );
+      $('#display').html( e.type + " event triggered, now on page " + (options.page + 1) );
     })
 
     // initialize the pager plugin
@@ -3888,9 +3930,11 @@ $.tablesorter.addHeaderResizeEvent( table, true );</pre></div>
     })
 
     // bind to pager events
-    .bind('pageMoved', function(e, c){
+    .bind('pageMoved', function(event, options){
+      // options = table.config.pager (pager addon)
+      // options = table.config (pager widget) - so use options.pager.page below
       // c.totalPages contains the total number of pages
-      $('#display').html( e.type + " event triggered, now on page " + (c.page + 1) );
+      $('#display').html( event.type + " event triggered, now on page " + (options.page + 1) );
     });
 
 });</pre></div>
